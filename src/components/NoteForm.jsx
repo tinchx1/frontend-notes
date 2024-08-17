@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { NoteContext } from '../context/NoteContext';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const NoteForm = ({ color, toggleModal }) => {
   const [note, setNote] = useState('');
@@ -14,7 +15,7 @@ const NoteForm = ({ color, toggleModal }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('process.env.BACKEND_URLapi/notes', {
+      const response = await fetch(`${BACKEND_URL}api/notes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
