@@ -14,7 +14,7 @@ const NoteForm = ({ color, toggleModal }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch('http://localhost:3001/api/notes', {
+      const response = await fetch('process.env.BACKEND_URLapi/notes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

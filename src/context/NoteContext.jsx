@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 export const NoteContext = createContext();
 
 const NoteContextProvider = ({ children }) => {
@@ -7,7 +8,7 @@ const NoteContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/notes', {
+        const response = await fetch(`${BACKEND_URL}api/notes`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -29,7 +30,7 @@ const NoteContextProvider = ({ children }) => {
 
   const deleteNote = (id) => {
     setNotes(notes.filter((note) => note._id !== id));
-    fetch(`http://localhost:3001/api/notes/${id}`, {
+    fetch(`${BACKEND_URL}api/notes/${id}`, {
       method: 'DELETE',
     });
   };
@@ -43,7 +44,7 @@ const NoteContextProvider = ({ children }) => {
         return note;
       })
     );
-    fetch(`http://localhost:3001/api/notes/${id}/archive`, {
+    fetch(`${BACKEND_URL}api/notes/${id}/archive`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +62,7 @@ const NoteContextProvider = ({ children }) => {
         return note;
       })
     );
-    fetch(`http://localhost:3001/api/notes/${id}/unarchive`, {
+    fetch(`${BACKEND_URL}api/notes/${id}/unarchive`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const NoteContextProvider = ({ children }) => {
     });
   };
   const updateNote = (note) => {
-    fetch(`http://localhost:3001/api/notes/${note._id}`, {
+    fetch(`${BACKEND_URL}api/notes/${note._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
